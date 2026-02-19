@@ -78,6 +78,8 @@ WebFetchがエラーになった場合は、そのサイトについて「取得
 存在しない場合。`Bash` で `output/` ディレクトリを作成する（`mkdir -p output`）。
 
 `Write` ツールで `output/summary-{今日の日付 YYYY-MM-DD}.md` にレポートを保存する。
+同名のファイルが存在する場合は、`output/summary-{今日の日付 YYYY-MM-DD}-1.md` のように連番を付けて保存する。
+
 
 ### 5. 完了報告
 
