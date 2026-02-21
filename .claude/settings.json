@@ -1,10 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch",
       "Read",
-      "Write(path:output/*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir *)",
+      "Bash(ls *)",
+      "WebFetch",
+      "Edit(/output/*)"
     ]
   }
 }
