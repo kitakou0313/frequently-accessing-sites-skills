@@ -2,8 +2,6 @@
   "permissions": {
     "allow": [
       "Read",
-      "Bash(mkdir *)",
-      "Bash(ls *)",
       "WebFetch",
       "Edit(/output/*)"
     ]
