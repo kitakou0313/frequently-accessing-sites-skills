@@ -1,9 +1,16 @@
 {
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "chrome-devtools"
+  ],
   "permissions": {
     "allow": [
       "Read",
       "WebFetch",
-      "Edit(/output/*)"
+      "Edit(/output/*)",
+      "mcp__chrome-devtools__navigate_page",
+      "mcp__chrome-devtools__take_snapshot",
+      "Bash(ls:*)"
     ]
   }
 }
