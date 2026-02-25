@@ -1,7 +1,7 @@
 ---
 name: summarize-sites
 description: Webサイトのリストから最新の記事を要約し、日本語のMarkdownレポートとしてエクスポートする。WebFetchツールでサイトを巡回し、記事をまとめます。サイト巡回、記事要約、ニュースまとめを求められた場合に使用する。
-compatibility: Uses WebFetch tool for page fetching.
+compatibility: Uses Chrome MCP for link extraction and WebFetch for article fetching.
 ---
 
 # summarize-sites
@@ -49,7 +49,12 @@ URLリストが空の場合はエラーメッセージを表示して終了す�
 
 各URLに対して以下の手順を実行する:
 
-1. `WebFetch` ツールでサイトのトップURLを取得する。promptには「記事・投稿・ニュースのリンクURLを最大10件抽出してください。相対URLは絶対URLに変換してください。」と指定する
+1. Chrome MCP を使ってサイトのトップURLからリンクURLを収集する。以下の手順で `count` 件に達するまで繰り返す:
+   - `mcp__chrome-devtools__navigate_page` でトップURLに遷移する
+   - `mcp__chrome-devtools__take_snapshot` でページのスナップショットを取得する
+   - スナップショットから記事・投稿・ニュースのリンクURL（相対URLは絶対URLに変換）を抽出し、収集済みリストに追加する
+   - 収集済みリスト件数が `count` 件に満たない場合、ページ内に「次のページ」「次へ」「older」「more」「load more」等のリンク一覧ページへ遷移するリンクがあれば、そのリンクに遷移して上記の抽出を繰り返す
+   - `count` 件以上収集できたか、次ページへのリンクが見つからなくなった時点で収集を終了する
 
 2. 抽出した記事URLのうち**先頭から `count` 件のみ**を処理し、それ以降はスキップする。**各記事を処理するたびに即座にファイルへ追記する**:
    - 最初の記事を処理する前に、以下のサイトヘッダーを `Edit` ツールでファイルへ追記する:
